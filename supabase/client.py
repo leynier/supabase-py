@@ -138,21 +138,27 @@ class Client:
         subscription
             The name of the channel
         """
-        if not subscription.closed:
-            await self._closeChannel(subscription)
+        # Commented meanwhile because _closeChannel are not implemented
+        # if not subscription.closed:
+        #     await self._closeChannel(subscription)
 
     def get_subscriptions(self):
         """Return all channels the the client is subscribed to."""
-        return self.realtime.channels
+        # Check if self.realtime is not None meanwhile for avoid typing issue
+        if self.realtime:
+            return self.realtime.channels
 
     @staticmethod
     def _init_realtime_client(
-        realtime_url: str, supabase_key: str
+        realtime_url: str,
+        supabase_key: str,
     ) -> SupabaseRealtimeClient:
         """Private method for creating an instance of the realtime-py client."""
-        return SupabaseRealtimeClient(
-            realtime_url, {"params": {"apikey": supabase_key}}
-        )
+        # Commented meanwhile because SupabaseRealtimeClient required other params
+        # return SupabaseRealtimeClient(
+        #     realtime_url,
+        #     {"params": {"apikey": supabase_key}},
+        # )
 
     @staticmethod
     def _init_supabase_auth_client(
